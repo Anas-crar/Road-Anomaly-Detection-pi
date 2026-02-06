@@ -1,0 +1,9 @@
+{
+  "total_frames": 114,
+  "total_detections": 5,
+  "total_inference_time": 2.7734758853912354,
+  "session_start": "2026-02-06T22:08:35.062065",
+  "avg_inference_time": 0.024328735836765224,
+  "avg_fps": 41.103656462446146,
+  "total_events": 12
+}

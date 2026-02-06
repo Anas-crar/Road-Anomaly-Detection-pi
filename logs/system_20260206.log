@@ -1,0 +1,99 @@
+2026-02-06 21:43:03,311 - root - INFO - AnomalyLogger initialized
+2026-02-06 21:43:03,727 - root - ERROR - Failed to save image: 'output/images/20260206_214303_319312.jpg' is not in the subpath of '/home/namelessweakling/Downloads/road_anomaly_detection'
+2026-02-06 21:43:03,728 - root - INFO - ANOMALY DETECTED [20260206_214303_319312]: test(0.99)
+2026-02-06 21:44:37,594 - root - INFO - AnomalyLogger initialized
+2026-02-06 21:44:38,238 - root - ERROR - Error in main loop: [ONNXRuntimeError] : 2 : INVALID_ARGUMENT : Got invalid dimensions for input: images for the following indices
+ index: 2 Got: 640 Expected: 320
+ index: 3 Got: 640 Expected: 320
+ Please fix either the inputs/outputs or the model.
+Traceback (most recent call last):
+  File "/home/namelessweakling/Downloads/road_anomaly_detection/main.py", line 240, in run
+    self.process_frame(frame)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/home/namelessweakling/Downloads/road_anomaly_detection/main.py", line 179, in process_frame
+    detections, inference_time = self.detector.detect(frame)
+                                 ~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/home/namelessweakling/Downloads/road_anomaly_detection/src/detector.py", line 218, in detect
+    outputs = self.session.run(self.output_names, {self.input_name: input_tensor})
+  File "/home/namelessweakling/Downloads/road_anomaly_detection/venv/lib/python3.14/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py", line 296, in run
+    return self._sess.run(output_names, input_feed, run_options)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+onnxruntime.capi.onnxruntime_pybind11_state.InvalidArgument: [ONNXRuntimeError] : 2 : INVALID_ARGUMENT : Got invalid dimensions for input: images for the following indices
+ index: 2 Got: 640 Expected: 320
+ index: 3 Got: 640 Expected: 320
+ Please fix either the inputs/outputs or the model.
+2026-02-06 21:44:38,297 - root - INFO - Session metrics saved to logs/metrics_20260206_214438.json
+2026-02-06 21:44:54,122 - root - INFO - AnomalyLogger initialized
+2026-02-06 21:44:54,774 - root - ERROR - Error in main loop: [ONNXRuntimeError] : 2 : INVALID_ARGUMENT : Got invalid dimensions for input: images for the following indices
+ index: 2 Got: 640 Expected: 320
+ index: 3 Got: 640 Expected: 320
+ Please fix either the inputs/outputs or the model.
+Traceback (most recent call last):
+  File "/home/namelessweakling/Downloads/road_anomaly_detection/main.py", line 240, in run
+    self.process_frame(frame)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/home/namelessweakling/Downloads/road_anomaly_detection/main.py", line 179, in process_frame
+    detections, inference_time = self.detector.detect(frame)
+                                 ~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/home/namelessweakling/Downloads/road_anomaly_detection/src/detector.py", line 218, in detect
+    outputs = self.session.run(self.output_names, {self.input_name: input_tensor})
+  File "/home/namelessweakling/Downloads/road_anomaly_detection/venv/lib/python3.14/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py", line 296, in run
+    return self._sess.run(output_names, input_feed, run_options)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+onnxruntime.capi.onnxruntime_pybind11_state.InvalidArgument: [ONNXRuntimeError] : 2 : INVALID_ARGUMENT : Got invalid dimensions for input: images for the following indices
+ index: 2 Got: 640 Expected: 320
+ index: 3 Got: 640 Expected: 320
+ Please fix either the inputs/outputs or the model.
+2026-02-06 21:44:54,836 - root - INFO - Session metrics saved to logs/metrics_20260206_214454.json
+2026-02-06 21:47:35,742 - root - INFO - AnomalyLogger initialized
+2026-02-06 21:47:36,387 - root - ERROR - Error in main loop: [ONNXRuntimeError] : 2 : INVALID_ARGUMENT : Got invalid dimensions for input: images for the following indices
+ index: 2 Got: 640 Expected: 320
+ index: 3 Got: 640 Expected: 320
+ Please fix either the inputs/outputs or the model.
+Traceback (most recent call last):
+  File "/home/namelessweakling/Downloads/road_anomaly_detection/main.py", line 240, in run
+    self.process_frame(frame)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/home/namelessweakling/Downloads/road_anomaly_detection/main.py", line 179, in process_frame
+    detections, inference_time = self.detector.detect(frame)
+                                 ~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/home/namelessweakling/Downloads/road_anomaly_detection/src/detector.py", line 218, in detect
+    outputs = self.session.run(self.output_names, {self.input_name: input_tensor})
+  File "/home/namelessweakling/Downloads/road_anomaly_detection/venv/lib/python3.14/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py", line 296, in run
+    return self._sess.run(output_names, input_feed, run_options)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+onnxruntime.capi.onnxruntime_pybind11_state.InvalidArgument: [ONNXRuntimeError] : 2 : INVALID_ARGUMENT : Got invalid dimensions for input: images for the following indices
+ index: 2 Got: 640 Expected: 320
+ index: 3 Got: 640 Expected: 320
+ Please fix either the inputs/outputs or the model.
+2026-02-06 21:47:36,416 - root - INFO - Session metrics saved to logs/metrics_20260206_214736.json
+2026-02-06 21:50:41,310 - root - INFO - AnomalyLogger initialized
+2026-02-06 21:50:41,338 - root - ERROR - Failed to save image: 'output/images/20260206_215041_321242.jpg' is not in the subpath of '/home/namelessweakling/Downloads/road_anomaly_detection'
+2026-02-06 21:50:41,339 - root - INFO - ANOMALY DETECTED [20260206_215041_321242]: test(0.99)
+2026-02-06 21:56:21,839 - root - INFO - AnomalyLogger initialized
+2026-02-06 21:56:21,882 - root - ERROR - Failed to save image: 'output/images/20260206_215621_873176.jpg' is not in the subpath of '/home/namelessweakling/Downloads/road_anomaly_detection'
+2026-02-06 21:56:21,883 - root - INFO - ANOMALY DETECTED [20260206_215621_873176]: test(0.99)
+2026-02-06 22:03:15,054 - root - INFO - AnomalyLogger initialized
+2026-02-06 22:03:15,147 - root - ERROR - Failed to save image: 'output/images/20260206_220315_140690.jpg' is not in the subpath of '/home/namelessweakling/Downloads/road_anomaly_detection'
+2026-02-06 22:03:15,148 - root - INFO - ANOMALY DETECTED [20260206_220315_140690]: test(0.99)
+2026-02-06 22:05:16,249 - root - INFO - AnomalyLogger initialized
+2026-02-06 22:05:16,260 - root - ERROR - Failed to save image: 'output/images/20260206_220516_254170.jpg' is not in the subpath of '/home/namelessweakling/Downloads/road_anomaly_detection'
+2026-02-06 22:05:16,262 - root - INFO - ANOMALY DETECTED [20260206_220516_254170]: test(0.99)
+2026-02-06 22:07:17,458 - root - INFO - AnomalyLogger initialized
+2026-02-06 22:07:17,537 - root - ERROR - Failed to save image: 'output/images/20260206_220717_530389.jpg' is not in the subpath of '/home/namelessweakling/Downloads/road_anomaly_detection'
+2026-02-06 22:07:17,538 - root - INFO - ANOMALY DETECTED [20260206_220717_530389]: test(0.99)
+2026-02-06 22:08:23,138 - root - INFO - AnomalyLogger initialized
+2026-02-06 22:08:23,149 - root - ERROR - Failed to save image: 'output/images/20260206_220823_143001.jpg' is not in the subpath of '/home/namelessweakling/Downloads/road_anomaly_detection'
+2026-02-06 22:08:23,151 - root - INFO - ANOMALY DETECTED [20260206_220823_143001]: test(0.99)
+2026-02-06 22:08:35,062 - root - INFO - AnomalyLogger initialized
+2026-02-06 22:08:37,168 - root - ERROR - Failed to save image: 'output/images/20260206_220837_161549.jpg' is not in the subpath of '/home/namelessweakling/Downloads/road_anomaly_detection'
+2026-02-06 22:08:37,170 - root - INFO - ANOMALY DETECTED [20260206_220837_161549]: pothole(0.58)
+2026-02-06 22:08:44,157 - root - ERROR - Failed to save image: 'output/images/20260206_220844_153094.jpg' is not in the subpath of '/home/namelessweakling/Downloads/road_anomaly_detection'
+2026-02-06 22:08:44,158 - root - INFO - ANOMALY DETECTED [20260206_220844_153094]: crack(0.53)
+2026-02-06 22:08:45,114 - root - ERROR - Failed to save image: 'output/images/20260206_220845_111133.jpg' is not in the subpath of '/home/namelessweakling/Downloads/road_anomaly_detection'
+2026-02-06 22:08:45,115 - root - INFO - ANOMALY DETECTED [20260206_220845_111133]: pothole(0.51)
+2026-02-06 22:08:46,530 - root - ERROR - Failed to save image: 'output/images/20260206_220846_523638.jpg' is not in the subpath of '/home/namelessweakling/Downloads/road_anomaly_detection'
+2026-02-06 22:08:46,532 - root - INFO - ANOMALY DETECTED [20260206_220846_523638]: crack(0.54)
+2026-02-06 22:08:58,135 - root - ERROR - Failed to save image: 'output/images/20260206_220858_131386.jpg' is not in the subpath of '/home/namelessweakling/Downloads/road_anomaly_detection'
+2026-02-06 22:08:58,137 - root - INFO - ANOMALY DETECTED [20260206_220858_131386]: pothole(0.50)
+2026-02-06 22:08:58,552 - root - INFO - Session metrics saved to logs/metrics_20260206_220858.json

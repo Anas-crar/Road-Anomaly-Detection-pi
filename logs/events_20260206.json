@@ -1,0 +1,230 @@
+[
+  {
+    "event_id": "20260206_214303_319312",
+    "timestamp": "2026-02-06T21:43:03.319312",
+    "detections": [
+      {
+        "class": "test",
+        "confidence": 0.99,
+        "bbox": [
+          100,
+          100,
+          200,
+          200
+        ]
+      }
+    ],
+    "inference_time": 0.1,
+    "frame_saved": false,
+    "clip_saved": false
+  },
+  {
+    "event_id": "20260206_215041_321242",
+    "timestamp": "2026-02-06T21:50:41.321242",
+    "detections": [
+      {
+        "class": "test",
+        "confidence": 0.99,
+        "bbox": [
+          100,
+          100,
+          200,
+          200
+        ]
+      }
+    ],
+    "inference_time": 0.1,
+    "frame_saved": false,
+    "clip_saved": false
+  },
+  {
+    "event_id": "20260206_215621_873176",
+    "timestamp": "2026-02-06T21:56:21.873176",
+    "detections": [
+      {
+        "class": "test",
+        "confidence": 0.99,
+        "bbox": [
+          100,
+          100,
+          200,
+          200
+        ]
+      }
+    ],
+    "inference_time": 0.1,
+    "frame_saved": false,
+    "clip_saved": false
+  },
+  {
+    "event_id": "20260206_220315_140690",
+    "timestamp": "2026-02-06T22:03:15.140690",
+    "detections": [
+      {
+        "class": "test",
+        "confidence": 0.99,
+        "bbox": [
+          100,
+          100,
+          200,
+          200
+        ]
+      }
+    ],
+    "inference_time": 0.1,
+    "frame_saved": false,
+    "clip_saved": false
+  },
+  {
+    "event_id": "20260206_220516_254170",
+    "timestamp": "2026-02-06T22:05:16.254170",
+    "detections": [
+      {
+        "class": "test",
+        "confidence": 0.99,
+        "bbox": [
+          100,
+          100,
+          200,
+          200
+        ]
+      }
+    ],
+    "inference_time": 0.1,
+    "frame_saved": false,
+    "clip_saved": false
+  },
+  {
+    "event_id": "20260206_220717_530389",
+    "timestamp": "2026-02-06T22:07:17.530389",
+    "detections": [
+      {
+        "class": "test",
+        "confidence": 0.99,
+        "bbox": [
+          100,
+          100,
+          200,
+          200
+        ]
+      }
+    ],
+    "inference_time": 0.1,
+    "frame_saved": false,
+    "clip_saved": false
+  },
+  {
+    "event_id": "20260206_220823_143001",
+    "timestamp": "2026-02-06T22:08:23.143001",
+    "detections": [
+      {
+        "class": "test",
+        "confidence": 0.99,
+        "bbox": [
+          100,
+          100,
+          200,
+          200
+        ]
+      }
+    ],
+    "inference_time": 0.1,
+    "frame_saved": false,
+    "clip_saved": false
+  },
+  {
+    "event_id": "20260206_220837_161549",
+    "timestamp": "2026-02-06T22:08:37.161549",
+    "detections": [
+      {
+        "class": "pothole",
+        "confidence": 0.5815390944480896,
+        "bbox": [
+          16,
+          80,
+          548,
+          490
+        ]
+      }
+    ],
+    "inference_time": 0.028708219528198242,
+    "frame_saved": false,
+    "clip_saved": false
+  },
+  {
+    "event_id": "20260206_220844_153094",
+    "timestamp": "2026-02-06T22:08:44.153094",
+    "detections": [
+      {
+        "class": "crack",
+        "confidence": 0.5320795178413391,
+        "bbox": [
+          417,
+          325,
+          530,
+          482
+        ]
+      }
+    ],
+    "inference_time": 0.01776432991027832,
+    "frame_saved": false,
+    "clip_saved": false
+  },
+  {
+    "event_id": "20260206_220845_111133",
+    "timestamp": "2026-02-06T22:08:45.111133",
+    "detections": [
+      {
+        "class": "pothole",
+        "confidence": 0.5100521445274353,
+        "bbox": [
+          53,
+          37,
+          530,
+          515
+        ]
+      }
+    ],
+    "inference_time": 0.016839027404785156,
+    "frame_saved": false,
+    "clip_saved": false
+  },
+  {
+    "event_id": "20260206_220846_523638",
+    "timestamp": "2026-02-06T22:08:46.523638",
+    "detections": [
+      {
+        "class": "crack",
+        "confidence": 0.5385758280754089,
+        "bbox": [
+          418,
+          352,
+          522,
+          480
+        ]
+      }
+    ],
+    "inference_time": 0.026127099990844727,
+    "frame_saved": false,
+    "clip_saved": false
+  },
+  {
+    "event_id": "20260206_220858_131386",
+    "timestamp": "2026-02-06T22:08:58.131386",
+    "detections": [
+      {
+        "class": "pothole",
+        "confidence": 0.5044786334037781,
+        "bbox": [
+          16,
+          83,
+          570,
+          492
+        ]
+      }
+    ],
+    "inference_time": 0.024928808212280273,
+    "frame_saved": false,
+    "clip_saved": false
+  }
+]
