@@ -1,0 +1,16 @@
+# Core Dependencies
+numpy>=1.21.0
+opencv-python>=4.5.0
+onnxruntime>=1.12.0  # Use onnxruntime for CPU
+PyYAML>=6.0
+
+# Optional: Use onnxruntime-armnn for Raspberry Pi optimization
+# onnxruntime-armnn
+
+# Utilities
+python-dateutil>=2.8.0
+psutil>=5.8.0
+
+# For quantization optimization (optional)
+# onnx>=1.12.0
+# onnxmltools>=1.11.0

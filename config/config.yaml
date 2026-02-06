@@ -1,0 +1,55 @@
+# Road Anomaly Detection Configuration
+
+# Model Configuration
+model:
+  path: "models/best.onnx"
+  input_size: [640, 640]  # Adjust based on your model's input size
+  confidence_threshold: 0.5
+  iou_threshold: 0.45
+  
+# Camera Configuration
+camera:
+  source: 0  # 0 for USB webcam, or path to video file for testing
+  resolution: [1280, 720]
+  fps: 30
+  
+# Detection Configuration
+detection:
+  classes:
+    - "pothole"
+    - "obstacle"
+    - "crack"
+    - "bump"
+  # Add your model's class names here
+  
+# Performance Configuration
+performance:
+  target_fps: 5
+  use_threading: true
+  buffer_size: 2
+  enable_gpu: false  # Set to true if using GPU on RPi with appropriate libraries
+  
+# Logging Configuration
+logging:
+  save_clips: true
+  save_images: true
+  clip_duration: 5  # seconds before and after detection
+  log_level: "INFO"
+  max_log_size_mb: 100
+  
+# Storage Configuration
+storage:
+  logs_dir: "logs"
+  clips_dir: "output/clips"
+  images_dir: "output/images"
+  max_storage_gb: 10  # Maximum storage for clips/images
+  cleanup_days: 7  # Delete files older than this
+  
+# Alert Configuration
+alerts:
+  min_detection_interval: 2  # Minimum seconds between logging same anomaly
+  severity_levels:
+    pothole: "high"
+    obstacle: "critical"
+    crack: "medium"
+    bump: "low"
