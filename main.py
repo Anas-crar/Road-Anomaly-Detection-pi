@@ -2,8 +2,8 @@ import time
 import cv2
 from config.settings import *
 from core.detector import ONNXDetector
-from io.camera import initialize_camera
-from io.recorder import EventRecorder
+from camera_io.camera import initialize_camera
+from camera_io.recorder import EventRecorder
 from utils.logger import log_event
 from utils.file_utils import generate_image_path
 from utils.fps import FPSCounter
