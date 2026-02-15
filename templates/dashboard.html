@@ -29,6 +29,20 @@
             </div>
         </section>
 
+        <!-- Live Feed Section -->
+        <section class="live-feed-section">
+            <div class="section-header">
+                <h2>🔴 Live Camera Feed</h2>
+                <button id="toggleFeedBtn" class="action-btn">Stop Feed</button>
+            </div>
+            <div class="video-container">
+                <img id="liveVideo" src="/video_feed_live" alt="Live Camera Feed" style="width: 100%; max-width: 800px; border-radius: 8px; border: 2px solid var(--neon-blue);">
+                <div id="feedPlaceholder" style="display:none; padding: 40px; text-align: center; color: var(--text-color);">
+                    <p>Feed Paused</p>
+                </div>
+            </div>
+        </section>
+
         <div class="main-content">
             <section class="gallery-section">
                 <h2>Recent Captures</h2>
@@ -241,6 +255,27 @@
                 closeModal();
             }
         }
+
+        // Live Feed Logic
+        const feedBtn = document.getElementById('toggleFeedBtn');
+        const liveVideo = document.getElementById('liveVideo');
+        const placeholder = document.getElementById('feedPlaceholder');
+
+        feedBtn.addEventListener('click', () => {
+            if (liveVideo.style.display !== 'none') {
+                liveVideo.style.display = 'none';
+                placeholder.style.display = 'block';
+                liveVideo.src = ""; // Stop stream to save bandwidth
+                feedBtn.innerText = "Start Feed";
+                feedBtn.classList.remove('active'); 
+            } else {
+                liveVideo.style.display = 'block';
+                placeholder.style.display = 'none';
+                liveVideo.src = "/video_feed_live";
+                feedBtn.innerText = "Stop Feed";
+                feedBtn.classList.add('active');
+            }
+        });
 
         // Initial load
         fetchStats();

@@ -143,10 +143,17 @@ def serve_image(filename):
 def serve_video(filename):
     return send_from_directory(VIDEOS_DIR, filename)
 
-@app.route('/video_feed/<path:filename>')
-def video_feed(filename):
-    video_path = os.path.join(VIDEOS_DIR, filename)
-    return Response(gen_frames(video_path), mimetype='multipart/x-mixed-replace; boundary=frame')
+@app.route('/video_feed_live')
+def video_feed_live():
+    def gen_live_frames():
+        while True:
+            frame = system.get_latest_frame()
+            if frame:
+                yield (b'--frame\r\n'
+                       b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+            time.sleep(0.04) # ~25 FPS
+
+    return Response(gen_live_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/api/thumbnail/<path:filename>')
 def get_thumbnail(filename):
@@ -169,6 +176,19 @@ def get_thumbnail(filename):
     except Exception as e:
         return str(e), 500
 
+# Initialize System
+# Note: In a production WSGI environment, this needs careful handling of workers.
+# For this project, we assume a single process.
+from core.system import AnomalyDetectorSystem
+system = AnomalyDetectorSystem()
+
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=True)
+    # Start the detection system
+    try:
+        system.start()
+        port = int(os.environ.get('PORT', 5000))
+        app.run(host='0.0.0.0', port=port, debug=False, use_reloader=False) # Disable reloader to prevent camera lock issues
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        system.stop()
