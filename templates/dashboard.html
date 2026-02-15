@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anomaly Detection Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Road Anomaly Detection System</h1>
+            <button id="themeToggle" class="theme-toggle">🌙 Dark Mode</button>
+        </header>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Anomalies</h3>
+                <p id="anomaly-count">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Images Saved</h3>
+                <p id="image-count">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Videos Saved</h3>
+                <p id="video-count">0</p>
+            </div>
+        </section>
+
+        <div class="main-content">
+            <section class="gallery-section">
+                <h2>Recent Captures</h2>
+                <div class="media-tabs">
+                    <button class="tab-btn active" onclick="showTab('images')">Images</button>
+                    <button class="tab-btn" onclick="showTab('videos')">Videos</button>
+                </div>
+                
+                <div id="images-gallery" class="gallery-grid active">
+                    <!-- Images will be injected here -->
+                </div>
+
+                <div id="videos-gallery" class="gallery-grid">
+                    <!-- Videos will be injected here -->
+                </div>
+            </section>
+
+            <section class="logs-section">
+                <h2>Recent Alerts</h2>
+                <ul id="logs-list">
+                    <!-- Logs will be injected here -->
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <!-- Media Modal -->
+    <div id="mediaModal" class="modal" onclick="closeModal()">
+        <span class="close">&times;</span>
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <!-- Image for static images -->
+            <img id="modalImage" style="display:none; width:100%; height:auto;">
+            
+            <!-- Image for MJPEG video stream (replaces video tag) -->
+            <img id="modalVideoStream" style="display:none; width:100%; height:auto;">
+            
+            <div id="modalCaption" style="text-align:center; padding:10px; color:#fff;"></div>
+            <div style="text-align:center; margin-top:10px;">
+                <a id="downloadLink" href="#" target="_blank" style="color:var(--neon-blue); text-decoration:none; border:1px solid var(--neon-blue); padding:5px 10px; border-radius:4px;">Download</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast-notification">
+        <h4>⚠️ New Anomaly Detected!</h4>
+        <p id="toast-message">A new anomaly has been recorded.</p>
+    </div>
+
+    <script>
+        // Theme Management
+        const toggleBtn = document.getElementById('themeToggle');
+        const root = document.documentElement;
+        
+        // Check saved theme or default to light
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            root.setAttribute('data-theme', 'dark');
+            toggleBtn.innerHTML = '☀️ Light Mode';
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            if (root.getAttribute('data-theme') === 'dark') {
+                root.removeAttribute('data-theme'); // Switch to light
+                localStorage.setItem('theme', 'light');
+                toggleBtn.innerHTML = '🌙 Dark Mode';
+            } else {
+                root.setAttribute('data-theme', 'dark'); // Switch to dark
+                localStorage.setItem('theme', 'dark');
+                toggleBtn.innerHTML = '☀️ Light Mode';
+            }
+        });
+
+        // Dashboard Logic
+        let lastAnomalyCount = -1;
+
+        function fetchStats() {
+            fetch('/api/stats')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('anomaly-count').innerText = data.anomalies;
+                    document.getElementById('image-count').innerText = data.images;
+                    document.getElementById('video-count').innerText = data.videos;
+                    
+                    // Check for new anomalies
+                    if (lastAnomalyCount !== -1 && data.anomalies > lastAnomalyCount) {
+                        showToast(data.recent_logs[0] ? data.recent_logs[0].type : "Unknown Anomaly");
+                    }
+                    lastAnomalyCount = data.anomalies;
+
+                    const logsList = document.getElementById('logs-list');
+                    logsList.innerHTML = `
+                        <table style="width:100%; text-align:left; border-collapse: collapse;">
+                            <thead>
+                                <tr style="border-bottom: 2px solid var(--neon-blue);">
+                                    <th style="padding:10px;">Timestamp</th>
+                                    <th style="padding:10px;">Type</th>
+                                    <th style="padding:10px;">Confidence</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${data.recent_logs.map(log => `
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding:10px; color: #8a9bb8;">${log.timestamp}</td>
+                                        <td style="padding:10px; color: var(--neon-blue);">${log.type}</td>
+                                        <td style="padding:10px;">${log.confidence}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    `;
+                });
+        }
+
+        function fetchMedia() {
+            fetch('/api/media')
+                .then(response => response.json())
+                .then(data => {
+                    const imgGrid = document.getElementById('images-gallery');
+                    imgGrid.innerHTML = '';
+                    data.images.forEach(img => {
+                        const div = document.createElement('div');
+                        div.className = 'media-item';
+                        div.innerHTML = `<img src="/media/images/${img}" alt="${img}" onclick="openModal('image', '/media/images/${img}', '${img}')"><span>${img}</span>`;
+                        imgGrid.appendChild(div);
+                    });
+
+                    const vidGrid = document.getElementById('videos-gallery');
+                    vidGrid.innerHTML = '';
+                    data.videos.forEach(vid => {
+                        const div = document.createElement('div');
+                        div.className = 'media-item';
+                        // Thumbnail with hover-to-play
+                        const thumbUrl = `/api/thumbnail/${vid}`;
+                        const streamUrl = `/video_feed/${vid}`;
+                        
+                        div.innerHTML = `
+                            <img src="${thumbUrl}" 
+                                 onmouseover="this.src='${streamUrl}'" 
+                                 onmouseout="this.src='${thumbUrl}'"
+                                 onclick="openModal('video', '/video_feed/${vid}', '${vid}')"
+                                 alt="${vid}"
+                                 style="cursor:pointer;">
+                            <div class="play-overlay" style="pointer-events:none;">▶</div>
+                            <span>${vid}</span>
+                        `;
+                        vidGrid.appendChild(div);
+                    });
+                });
+        }
+
+        function showTab(type) {
+            document.querySelectorAll('.gallery-grid').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(type + '-gallery').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Modal Functions
+        function openModal(type, src, caption) {
+            const modal = document.getElementById('mediaModal');
+            const modalImg = document.getElementById('modalImage');
+            const modalVideoStream = document.getElementById('modalVideoStream');
+            const modalCaption = document.getElementById('modalCaption');
+            const downloadLink = document.getElementById('downloadLink');
+
+            modal.style.display = "block";
+            modalCaption.innerText = caption;
+            
+            // For download, always point to the raw file
+            downloadLink.href = src;
+            downloadLink.download = caption;
+
+            if (type === 'image') {
+                modalImg.src = src;
+                modalImg.style.display = "block";
+                modalVideoStream.style.display = "none";
+                modalVideoStream.src = ""; // Stop stream
+            } else {
+                // For video, point to the streaming route
+                // src is like /media/videos/filename.mp4 -> /video_feed/filename.mp4
+                const filename = src.split('/').pop();
+                modalVideoStream.src = "/video_feed/" + filename;
+                
+                modalVideoStream.style.display = "block";
+                modalImg.style.display = "none";
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('mediaModal');
+            const modalVideoStream = document.getElementById('modalVideoStream');
+            modal.style.display = "none";
+            modalVideoStream.src = ""; // Stop stream
+        }
+
+        // Toast Function
+        function showToast(anomalyType) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = `Detected: ${anomalyType}`;
+            toast.className = "toast-notification show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
+        // Close modal when clicking outside content (handled in HTML onclick)
+        window.onclick = function(event) {
+            const modal = document.getElementById('mediaModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Initial load
+        fetchStats();
+        fetchMedia();
+
+        // Auto-refresh every 5 seconds
+        setInterval(fetchStats, 5000);
+        setInterval(fetchMedia, 10000);
+    </script>
+</body>
+</html>

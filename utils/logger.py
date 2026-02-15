@@ -9,5 +9,5 @@ def log_event(message):
     log_message = f"[{timestamp}] {message}"
     print(log_message)
 
-    with open("output/logs/events.log", "a") as f:
+    with open("output/logs/events.log", "a", encoding='utf-8') as f:
         f.write(log_message + "\n")

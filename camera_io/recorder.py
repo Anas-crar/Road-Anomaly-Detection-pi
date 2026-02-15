@@ -17,12 +17,15 @@ class EventRecorder:
         path = generate_video_path()
         height, width = frame_shape[:2]
 
-        self.writer = cv2.VideoWriter(
-            path,
-            cv2.VideoWriter_fourcc(*"mp4v"),
-            fps,
-            (width, height)
-        )
+        # Try to use H.264 (avc1) first, fallback to mp4v
+        fourcc = cv2.VideoWriter_fourcc(*"avc1")
+        self.writer = cv2.VideoWriter(path, fourcc, fps, (width, height))
+        
+        if not self.writer.isOpened():
+            # Fallback to mp4v if avc1 fails
+            print("Warning: avc1 codec not available, falling back to mp4v")
+            fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+            self.writer = cv2.VideoWriter(path, fourcc, fps, (width, height))
 
         for frame in self.buffer:
             self.writer.write(frame)
